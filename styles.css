@@ -135,6 +135,7 @@ body.js-motion .secao .endereco,
 body.js-motion .secao .local-final,
 body.js-motion .secao .acoes,
 body.js-motion .secao .subfinal,
+body.js-motion .secao .bloco-apoio,
 body.js-motion .secao .assinatura {
   opacity: 0;
   transform: translateY(14px);
@@ -152,6 +153,7 @@ body.js-motion .secao.secao-ativa .endereco,
 body.js-motion .secao.secao-ativa .local-final,
 body.js-motion .secao.secao-ativa .acoes,
 body.js-motion .secao.secao-ativa .subfinal,
+body.js-motion .secao.secao-ativa .bloco-apoio,
 body.js-motion .secao.secao-ativa .assinatura {
   animation: ativarItem 520ms var(--movimento) both;
 }
@@ -183,6 +185,7 @@ body.js-motion .secao.secao-ativa .local-final {
 }
 
 body.js-motion .secao.secao-ativa .acoes,
+body.js-motion .secao.secao-ativa .bloco-apoio,
 body.js-motion .secao.secao-ativa .assinatura {
   animation-delay: var(--atraso-acoes, 650ms);
 }
@@ -420,15 +423,26 @@ h2 {
   background: var(--branco);
 }
 
+.secao-final {
+  padding-top: clamp(2.2rem, 3.8svh, 3.8rem);
+  padding-bottom: clamp(1.8rem, 4.1svh, 3.1rem);
+}
+
+.secao-final .conteudo {
+  min-height: calc(100svh - (clamp(2.2rem, 3.8svh, 3.8rem) + clamp(1.8rem, 4.1svh, 3.1rem)));
+}
+
 .final-grid {
-  grid-template-rows: auto 1fr auto auto auto;
+  grid-template-rows: auto auto auto auto auto auto;
+  align-content: space-between;
+  gap: clamp(0.45rem, 1.2svh, 0.9rem);
 }
 
 .final-grid h2 {
   align-self: end;
   color: var(--amarelo);
-  font-size: clamp(4.8rem, 9vw, 10.8rem);
-  line-height: 0.76;
+  font-size: clamp(4.3rem, 7vw, 8.5rem);
+  line-height: 0.72;
 }
 
 .final-grid h2 span {
@@ -436,10 +450,10 @@ h2 {
 }
 
 .subfinal {
-  margin: clamp(1rem, 2.4svh, 1.7rem) 0 0;
+  margin: clamp(0.35rem, 1svh, 0.8rem) 0 0;
   color: var(--branco);
-  font-size: clamp(2.2rem, 3.5vw, 4.2rem);
-  line-height: 0.88;
+  font-size: clamp(2rem, 2.8vw, 3.5rem);
+  line-height: 0.84;
 }
 
 .subfinal::before {
@@ -452,19 +466,56 @@ h2 {
 }
 
 .local-final-principal {
-  margin: 0 0 clamp(0.85rem, 2svh, 1.25rem);
+  margin: 0 0 clamp(0.3rem, 0.8svh, 0.7rem);
   color: var(--amarelo);
-  font-size: clamp(2.35rem, 4.2vw, 5rem);
-  line-height: 0.82;
+  font-size: clamp(2rem, 3vw, 3.9rem);
+  line-height: 0.78;
 }
 
 .endereco-final {
   max-width: 620px;
-  font-size: clamp(1.45rem, 1.15vw + 0.95rem, 2.25rem);
+  font-size: clamp(1.25rem, 0.8vw + 0.85rem, 1.9rem);
+  line-height: 0.88;
 }
 
 .apoio.final {
   margin-top: 0;
+  font-size: clamp(1.5rem, 1.8vw, 2.45rem);
+  line-height: 0.84;
+}
+
+.bloco-apoio {
+  display: grid;
+  gap: clamp(0.35rem, 0.8svh, 0.65rem);
+}
+
+.bloco-apoio p {
+  margin: 0;
+  color: var(--amarelo);
+  font-size: clamp(1.3rem, 1.55vw, 2.2rem);
+  line-height: 0.84;
+}
+
+.logos-apoio {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.4vw, 1.25rem);
+  align-items: center;
+}
+
+.logos-apoio img {
+  display: block;
+  width: 100%;
+  max-height: clamp(1.8rem, 4.2svh, 3rem);
+  object-fit: contain;
+}
+
+.secao-final .assinatura {
+  min-height: clamp(3rem, 6svh, 4.4rem);
+}
+
+.secao-final .assinatura img {
+  max-height: clamp(44px, 5.6svh, 62px);
 }
 
 .assinatura {
@@ -670,6 +721,14 @@ h2 {
     font-size: clamp(2rem, 8vw, 3rem);
   }
 
+  .logos-apoio {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .logos-apoio img {
+    max-height: 3.8rem;
+  }
+
   .hora-box {
     border-left-width: 2px;
   }
@@ -741,14 +800,138 @@ h2 {
   }
 }
 
+@media (max-height: 850px) and (min-width: 760px) {
+  .secao-final {
+    padding-top: 1.1rem;
+    padding-bottom: 2.2rem;
+  }
+
+  .secao-final .conteudo {
+    min-height: calc(100svh - 3.3rem);
+  }
+
+  .final-grid {
+    gap: clamp(0.35rem, 0.9svh, 0.7rem);
+  }
+
+  .final-grid h2 {
+    font-size: clamp(3.85rem, 6.2vw, 6.7rem);
+    line-height: 0.7;
+  }
+
+  .subfinal {
+    margin-top: 0.25rem;
+    font-size: clamp(1.75rem, 2.3vw, 2.8rem);
+    line-height: 0.82;
+  }
+
+  .local-final-principal {
+    margin-bottom: 0.25rem;
+    font-size: clamp(1.8rem, 2.65vw, 3.2rem);
+    line-height: 0.76;
+  }
+
+  .endereco-final {
+    font-size: clamp(1.12rem, 0.68vw + 0.78rem, 1.55rem);
+    line-height: 0.84;
+  }
+
+  .apoio.final {
+    font-size: clamp(1.35rem, 1.55vw, 2rem);
+    line-height: 0.82;
+  }
+
+  .bloco-apoio p {
+    font-size: clamp(1.18rem, 1.35vw, 1.75rem);
+  }
+
+  .logos-apoio img {
+    max-height: clamp(1.55rem, 3.6svh, 2.35rem);
+  }
+
+  .secao-final .assinatura {
+    min-height: clamp(2.5rem, 5.2svh, 3.6rem);
+  }
+
+  .secao-final .assinatura img {
+    max-height: clamp(38px, 5svh, 52px);
+  }
+}
+
+@media (max-height: 750px) and (min-width: 760px) {
+  .secao-final {
+    padding-top: 1.2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .secao-final .conteudo {
+    min-height: calc(100svh - 2.7rem);
+  }
+
+  .final-grid {
+    gap: clamp(0.25rem, 0.65svh, 0.55rem);
+  }
+
+  .final-grid h2 {
+    font-size: clamp(3.45rem, 5.7vw, 5.8rem);
+    line-height: 0.69;
+  }
+
+  .subfinal {
+    font-size: clamp(1.55rem, 2.05vw, 2.35rem);
+  }
+
+  .local-final-principal {
+    font-size: clamp(1.6rem, 2.45vw, 2.8rem);
+  }
+
+  .endereco-final {
+    font-size: clamp(1.02rem, 0.58vw + 0.72rem, 1.35rem);
+    line-height: 0.82;
+  }
+
+  .apoio.final {
+    font-size: clamp(1.2rem, 1.4vw, 1.75rem);
+  }
+
+  .bloco-apoio {
+    gap: 0.25rem;
+  }
+
+  .bloco-apoio p {
+    font-size: clamp(1.05rem, 1.2vw, 1.5rem);
+  }
+
+  .logos-apoio img {
+    max-height: clamp(1.35rem, 3.2svh, 2rem);
+  }
+
+  .secao-final .assinatura {
+    min-height: 2.75rem;
+  }
+
+  .secao-final .assinatura img {
+    max-height: 44px;
+  }
+}
+
 @media (max-height: 720px) and (min-width: 760px) {
   .secao {
     padding-top: 3.2rem;
     padding-bottom: 2rem;
   }
 
+  .secao-final {
+    padding-top: 1rem;
+    padding-bottom: 1.4rem;
+  }
+
   .conteudo {
     min-height: calc(100svh - 5.2rem);
+  }
+
+  .secao-final .conteudo {
+    min-height: calc(100svh - 2.4rem);
   }
 
   .chamada {
@@ -766,6 +949,30 @@ h2 {
 
   .apoio {
     font-size: clamp(1.8rem, 2vw, 2.6rem);
+  }
+
+  .final-grid {
+    gap: clamp(0.45rem, 1.3svh, 0.85rem);
+  }
+
+  .bloco-apoio {
+    gap: 0.35rem;
+  }
+
+  .bloco-apoio p {
+    font-size: clamp(1rem, 1.12vw, 1.35rem);
+  }
+
+  .logos-apoio img {
+    max-height: 1.8rem;
+  }
+
+  .secao-final .assinatura {
+    min-height: 2.55rem;
+  }
+
+  .secao-final .assinatura img {
+    max-height: 40px;
   }
 }
 
@@ -791,6 +998,7 @@ h2 {
   body.js-motion .secao .local-final,
   body.js-motion .secao .acoes,
   body.js-motion .secao .subfinal,
+  body.js-motion .secao .bloco-apoio,
   body.js-motion .secao .assinatura {
     opacity: 1;
     clip-path: none;
