@@ -1,5 +1,5 @@
 window.HACKAEMES_SITE = {
-  dataCurtaHorario: "27.09.2026 // 08H",
+  dataCurtaHorario: "27.09.2026\n// 08H",
   dataLocalCurta: "27.09 // ESTÂNCIA — SE",
   horario: "08H",
   enderecoCompleto: [
